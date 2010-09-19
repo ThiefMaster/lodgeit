@@ -101,9 +101,10 @@ class Paste(db.Model):
         )).order_by(Paste.paste_id.desc()).all()
 
         to_mark = [p.paste_id for p in paste_list]
-        Paste.query.filter(Paste.paste_id.in_(to_mark)) \
-                   .update(values={'handled': True})
-        db.session.commit()
+        if to_mark:
+            Paste.query.filter(Paste.paste_id.in_(to_mark)) \
+                       .update(values={'handled': True})
+            db.session.commit()
         return paste_list
 
     def _get_private(self):
