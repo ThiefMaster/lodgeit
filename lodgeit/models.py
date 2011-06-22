@@ -117,8 +117,10 @@ class Paste(db.Model):
         if self.private_id is None:
             while 1:
                 self.private_id = generate_paste_hash()
-                paste = Paste.query.filter(Paste.private_id ==
-                                           self.private_id).first()
+                paste = Paste.query.filter(db.and_(Paste.private_id ==
+                                           self.private_id,
+                                           Paste.paste_id != self.paste_id)) \
+                                   .first()
                 if paste is None:
                     break
     private = property(_get_private, _set_private, doc='''

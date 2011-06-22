@@ -178,7 +178,7 @@ var LodgeIt = {
 };
 
 $(document).ready(function() {
-  LodgeIt.init;
+  LodgeIt.init();
 
   /* Autocomplete languages */
 
