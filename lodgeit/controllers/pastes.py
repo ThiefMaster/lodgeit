@@ -64,6 +64,8 @@ class PasteController(object):
                 return redirect(paste.url)
 
         else:
+            if local.request.args.get('private') != '0':
+                private = True
             parent_id = req.values.get('reply_to')
             if parent_id is not None:
                 parent = Paste.get(parent_id)
