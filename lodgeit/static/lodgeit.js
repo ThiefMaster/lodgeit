@@ -13,7 +13,7 @@ var LodgeIt = {
 
   _toggleLock : false,
   insertTabs : false,
-  
+
   init : function() {
     /**
      * make textarea 1px height and save the value for resizing
@@ -67,7 +67,7 @@ var LodgeIt = {
     var paste_filter = $('div.paste_filter form');
     if (paste_filter.length && !paste_filter.is('.open'))
       paste_filters.hide();
-    
+
     /**
      * links marked with "autoclose" inside the related div
      * use some little magic to get an auto hide animation on
