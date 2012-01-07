@@ -94,7 +94,7 @@ class Paste(db.Model):
         ids = db.session.query(Paste.paste_id) \
                         .filter(Paste.user_hash == local.request.user_hash)
 
-        paste_list = db.session.query(Paste.paste_id).filter(db.and_(
+        paste_list = db.session.query(Paste).filter(db.and_(
             Paste.parent_id.in_(ids),
             Paste.handled == False,
             Paste.user_hash != local.request.user_hash,
@@ -103,7 +103,8 @@ class Paste(db.Model):
         to_mark = [p.paste_id for p in paste_list]
         if to_mark:
             Paste.query.filter(Paste.paste_id.in_(to_mark)) \
-                       .update(values={'handled': True})
+                       .update(values={'handled': True},
+                           synchronize_session='fetch')
             db.session.commit()
         return paste_list
 
