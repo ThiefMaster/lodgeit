@@ -191,23 +191,4 @@ $(document).ready(function() {
     ids.push($(this).val());
     languages.push($(this).text());
   });
-
-  var new_input = $('<input type="text" name="language" value="Text only">')
-    .autocomplete({
-        source: languages,
-        select: function(event, ui) {
-          if (ui.item.value.toLowerCase().startsWith('multi'))
-            multiFileInfo.fadeIn();
-          else
-            multiFileInfo.fadeOut('fast');
-        }
-    })
-    .click(function() { $(this).val(''); });
-  $('form.submitform select[name="language"]').replaceWith($(new_input));
-
-  /* Bind a processable value to the input field on submitting */
-  $('form.submitform').submit(function() {
-    new_input.val(ids[$.inArray(new_input.val(), languages)]);
-  });
- 
 });
